@@ -139,3 +139,4 @@ REST_FRAMEWORK = {
     ],
 }
 LOGIN_REDIRECT_URL = '/accounts/profile/'
+LOGOUT_REDIRECT_URL = '/login/'

@@ -234,7 +234,10 @@
             </div>
         </div>
     </div>
-
+<form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">تسجيل الخروج (Logout)</button>
+</form>
     <script src="{% static 'script.js' %}""></script>
 </body>
 
