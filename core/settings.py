@@ -122,8 +122,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # هادي فين كيتجمعو فالـ Render
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 CORS_ALLOW_ALL_ORIGINS = True # باش الـ JS يقدر يتواصل مع Django بلا حظر
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
