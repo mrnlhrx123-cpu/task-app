@@ -1,37 +1,45 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; 
+            background: linear-gradient(135deg, #007bff, #28a745); font-family: sans-serif;">
+    
+    <div style="background: rgba(255, 255, 255, 0.9); padding: 40px; border-radius: 20px; 
+                width: 350px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+        
+        <div style="background: #004a99; width: 80px; height: 80px; border-radius: 50%; 
+                    margin: -80px auto 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">
+            👤
+        </div>
 
-<head>
-    <meta charset="UTF-8">
-    <title>تسجيل الدخول</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: #f4f4f9;
-        }
+        <h2 style="color: #004a99; margin-bottom: 20px;">Login</h2>
 
-        .login-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-</head>
+        <form method="post">
+            {% csrf_token %}
+            <div style="margin-bottom: 15px; text-align: left;">
+                <label style="display: block; color: #333;">Username</label>
+                <input type="text" name="username" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+            <div style="margin-bottom: 20px; text-align: left;">
+                <label style="display: block; color: #333;">Password</label>
+                <input type="password" name="password" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
 
-<body>
-    <h2>تسجيل الدخول</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">دخول</button>
-</form>
+            <button type="submit" style="width: 100%; padding: 12px; background: #004a99; color: white; 
+                                        border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">
+                LOGIN
+            </button>
+        </form>
 
-<p>مازال ما عندكش حساب؟ <a href="{% url 'register' %}">تسجيل حساب جديد</a></p>
-</body>
-
-</html>
+        <p style="margin-top: 15px; font-size: 14px;">
+            مازال ما عندكش حساب؟ <a href="{% url 'register' %}" style="color: #28a745;">سجل هنا</a>
+        </p>
+    </div>
+</div>
+<script>
+    var inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.style.width = '100%';
+        input.style.padding = '10px';
+        input.style.border = '1px solid #ccc';
+        input.style.borderRadius = '5px';
+        input.style.boxSizing = 'border-box';
+    });
+</script>
