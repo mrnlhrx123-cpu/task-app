@@ -4,6 +4,7 @@ from .models import Task
 from .serializers import TaskSerializer
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.shortcuts import render
 
 # 1. الـ View المسؤول عن عرض صفحة الـ HTML (Dashboard)
 def home_view(request):
@@ -23,3 +24,7 @@ class TaskViewSet(viewsets.ModelViewSet):
 @login_required(login_url='/login/') 
 def home_view(request):
     return render(request, 'index.html')        
+
+@login_required # هادي كتحمي الصفحة، يعني غير اللي مسجل يقدر يدخل
+def profile(request):
+    return render(request, 'profile.html') # خاصك تصاوبي هاد الملف فالـ templates
