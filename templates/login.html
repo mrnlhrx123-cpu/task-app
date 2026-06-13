@@ -24,14 +24,14 @@
 </head>
 
 <body>
-    <div class="login-card">
-        <h2>أهلاً بك، يرجى تسجيل الدخول</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">دخول</button>
-        </form>
-    </div>
+    <h2>تسجيل الدخول</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">دخول</button>
+</form>
+
+<p>مازال ما عندكش حساب؟ <a href="{% url 'register' %}">تسجيل حساب جديد</a></p>
 </body>
 
 </html>
