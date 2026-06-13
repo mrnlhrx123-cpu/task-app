@@ -28,3 +28,5 @@ def home_view(request):
 @login_required # هادي كتحمي الصفحة، يعني غير اللي مسجل يقدر يدخل
 def profile(request):
     return render(request, 'profile.html') # خاصك تصاوبي هاد الملف فالـ templates
+def profile(request):
+    return render(request, 'profile.html')
