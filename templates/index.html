@@ -99,22 +99,49 @@
                 </header>
                 <div class="editor-layout">
                     <div class="form-card">
-                        <h3 class="subsection-title">➕ إضافة مهمة جديدة</h3>
-                        <div id="success-alert" class="alert-success hidden">✓ تم حفظ المهمة بنجاح!</div>
-                        <div class="form-group">
-                            <label for="task-input">اسم المهمة:</label>
-                            <input type="text" id="task-input" placeholder="ماذا تريد أن تنجز؟">
-                        </div>
-                        <div class="form-group">
-                            <label for="task-date">تاريخ التنفيذ:</label>
-                            <input type="date" id="task-date">
-                        </div>
-                        <div class="form-group">
-                            <label for="task-duration">الوقت المتوقع (بالدقائق):</label>
-                            <input type="number" id="task-duration" value="30" min="5">
-                        </div>
-                        <button id="save-task-btn">✓ حفظ المهمة</button>
-                    </div>
+    <h3 class="subsection-title">➕ إضافة مهمة جديدة</h3>
+    
+    <!-- اسم المهمة -->
+    <div class="form-group">
+        <label>اسم المهمة:</label>
+        <input type="text" id="task-input" placeholder="ماذا تريد أن تنجز؟">
+    </div>
+
+    <!-- الفئة (Category) -->
+    <div class="form-group">
+        <label>الفئة:</label>
+        <select id="task-category">
+            <option value="Work">Work</option>
+            <option value="Studying">Studying</option>
+            <option value="Hobbies">Hobbies</option>
+        </select>
+        <button onclick="addCustomCategory()" style="font-size: 10px; margin-top: 5px;">+ زيادة فئة</button>
+    </div>
+
+    <!-- اختيارية: الوصف -->
+    <div class="form-group">
+        <label>الوصف (اختياري):</label>
+        <textarea id="task-desc" placeholder="أضف وصفاً للمهمة..."></textarea>
+    </div>
+
+    <!-- التواريخ والساعة -->
+    <div class="form-group">
+        <label>التاريخ:</label>
+        <input type="date" id="task-date">
+    </div>
+
+    <div class="form-group">
+        <label>ساعة البدء (اختياري):</label>
+        <input type="time" id="task-start-time">
+    </div>
+
+    <div class="form-group">
+        <label>المدة (بالدقائق - اختياري):</label>
+        <input type="number" id="task-duration" placeholder="مثلاً: 30">
+    </div>
+
+    <button id="save-task-btn">✓ حفظ المهمة</button>
+</div>
                     <div class="day-manager-card">
                         <div class="manager-header">
                             <h3>🔍 جدول مهام اليوم المحدد</h3>

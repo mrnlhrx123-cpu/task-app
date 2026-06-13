@@ -525,6 +525,50 @@ document.addEventListener("DOMContentLoaded", function () {
             performanceBarChart.appendChild(barWrapper);
         });
     }
+    document.addEventListener('DOMContentLoaded', function() {
+
+    // 1. وظيفة إضافة فئة جديدة (Category)
+    window.addCustomCategory = function() {
+        let newCat = prompt("أدخل اسم الفئة الجديدة:");
+        if (newCat && newCat.trim() !== "") {
+            let select = document.getElementById('task-category');
+            let option = document.createElement('option');
+            option.value = newCat;
+            option.text = newCat;
+            select.add(option);
+            select.value = newCat; // باش يختارها هي أوتوماتيكياً
+        }
+    };
+
+    // 2. وظيفة حفظ المهمة (Save Task)
+    const saveBtn = document.getElementById('save-task-btn');
+    if (saveBtn) {
+        saveBtn.addEventListener('click', function() {
+            // قراءة القيم الجديدة
+            const taskData = {
+                name: document.getElementById('task-input').value,
+                category: document.getElementById('task-category').value,
+                description: document.getElementById('task-desc') ? document.getElementById('task-desc').value : "",
+                date: document.getElementById('task-date').value,
+                startTime: document.getElementById('task-start-time') ? document.getElementById('task-start-time').value : "",
+                duration: document.getElementById('task-duration').value
+            };
+
+            // التحقق الأساسي
+            if (!taskData.name || !taskData.date) {
+                alert("المرجو ملء اسم المهمة والتاريخ على الأقل!");
+                return;
+            }
+
+            console.log("Saving Task:", taskData);
+            
+            // هنا غادي ديري الـ fetch اللي كيسيفط الداتا لـ Django
+            // fetch('/api/tasks/add/', { method: 'POST', body: JSON.stringify(taskData) ... })
+            
+            alert("تم حفظ المهمة بنجاح!");
+        });
+    }
+});
 
     // 🚀 التشغيل الأولي الفوري عند فتح الموقع
     fetchTasks();
