@@ -26,6 +26,17 @@
                 <button class="menu-btn" id="menu-editor">⚙️ Task Editor</button>
                 <button class="menu-btn" id="menu-all-tasks">📅 كل المهام</button>
             </nav>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: #333; color: white;">
+    <span>My Task App</span>
+    
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" style="background: linear-gradient(0deg, #b71c1c 0%, #e53935 100%); 
+                                    padding: 0.5em 1em; border: none; border-radius: 20px; color: white; cursor: pointer;">
+            Logout
+        </button>
+    </form>
+</div>
         </aside>
 
         <!-- المحتوى الرئيسي -->
@@ -234,22 +245,7 @@
             </div>
         </div>
     </div>
-<form method="post" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <button type="submit" 
-        style="display: flex; align-items: center; cursor: pointer; font-weight: 500; font-size: 16px; 
-               padding: 0.7em 1.4em 0.7em 1.1em; color: white; border: none; letter-spacing: 0.05em; border-radius: 20em;
-               background: linear-gradient(0deg, rgba(20, 167, 62, 1) 0%, rgba(102, 247, 113, 1) 100%);
-               box-shadow: 0 0.7em 1.5em -0.5em #14a73e98; transition: all 0.3s ease;">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 6px;">
-            <path d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
-            <path d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-        </svg>
-        
-        Logout
-    </button>
-</form>
+
     <script src="{% static 'script.js' %}""></script>
 </body>
 

@@ -35,8 +35,11 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # باش يتكونيكتا مباشرة مورما يتسجل
+            login(request, user)
             return redirect('home')
+        else:
+            # هادي غتخلينا نشوفو الخطأ فـ الـ Terminal ديال Render
+            print("Form errors:", form.errors) 
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
