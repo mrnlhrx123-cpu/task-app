@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>تسجيل حساب جديد</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">تسجيل</button>
+    </form>
+    <p>ديجا عندك حساب؟ <a href="{% url 'login' %}">سجل الدخول</a></p>
+</body>
+</html>

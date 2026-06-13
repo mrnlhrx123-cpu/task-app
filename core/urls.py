@@ -13,5 +13,6 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     # وتأكدي أن الـ profile حتى هي كتستعمل task_views.profile
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('accounts/profile/', task_views.profile, name='profile')
+    path('accounts/profile/', task_views.profile, name='profile'),
+    path('register/', task_views.register, name='register'),
 ]
