@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo Pro - إدارة المهام الذكية</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght=400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="app-layout">
+
+        <!-- الشريط الجانبي (Sidebar) -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>ToDo Pro</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <button class="menu-btn active" id="menu-home">🏠 الرئيسية</button>
+                <button class="menu-btn" id="menu-editor">⚙️ Task Editor</button>
+                <button class="menu-btn" id="menu-all-tasks">📅 كل المهام</button>
+            </nav>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+
+            <!-- زر تبديل الوضع الداكن/الفاتح في رأس الصفحة -->
+            <div class="top-bar-actions">
+                <button id="theme-toggle-btn" class="theme-btn">🌙 المظهر الداكن</button>
+            </div>
+
+            <!-- 1. قسم الرئيسية (Dashboard) -->
+            <!-- 1. قسم الرئيسية (Dashboard) -->
+            <section id="section-home" class="content-section">
+                <header class="content-header">
+                    <h1>لوحة التحليل والأداء</h1>
+                    <p id="today-date-display">اليوم: </p>
+                </header>
+
+                <div class="dashboard-filter-bar">
+                    <span class="filter-title">🔍 فلترة التحليلات حسب الفترة:</span>
+                    <div class="filter-inputs">
+                        <div class="filter-group">
+                            <label>من:</label>
+                            <input type="date" id="dash-start-date">
+                        </div>
+                        <div class="filter-group">
+                            <label>إلى:</label>
+                            <input type="date" id="dash-end-date">
+                        </div>
+                        <button id="reset-filter-btn" class="btn-reset">إعادة تعيين</button>
+                    </div>
+                </div>
+
+                <!-- شبكة الـ Dashboard المحدثة بـ 3 أعمدة -->
+                <div class="dashboard-grid">
+
+                    <!-- العمود 1: التوزيع العام -->
+                    <div class="chart-card">
+                        <h3>التوزيع العام (%)</h3>
+                        <div class="circular-chart" id="task-chart">
+                            <div class="chart-center"><span id="chart-text">0%</span></div>
+                        </div>
+                        <div class="chart-legend">
+                            <span class="legend-item"><span class="dot planned"></span> مخطط</span>
+                            <span class="legend-item"><span class="dot completed"></span> منجز</span>
+                            <span class="legend-item"><span class="dot postponed"></span> مؤجل</span>
+                        </div>
+                    </div>
+
+                    <!-- العمود 2: نسبة إنجاز الأيام المحددت -->
+                    <div class="chart-card performance-card">
+                        <h3>📈 نسبة إنجاز الأيام</h3>
+                        <div class="bar-chart-container" id="performance-bar-chart"></div>
+                    </div>
+
+                    <!-- العمود 3 المدمج: فيه الإحصائيات الرقمية + مهام اليوم الحالية في الجنب -->
+                    <div class="dashboard-side-column">
+                        <div class="stats-grid-row">
+                            <div class="stat-box planned">
+                                <h4 id="stat-planned">0</h4>
+                                <p>مخططة</p>
+                            </div>
+                            <div class="stat-box completed">
+                                <h4 id="stat-completed">0</h4>
+                                <p>منجزة</p>
+                            </div>
+                            <div class="stat-box postponed">
+                                <h4 id="stat-postponed">0</h4>
+                                <p>مؤجلة</p>
+                            </div>
+                        </div>
+
+                        <!-- هنا أصبحت مهام اليوم الحالية واقفة في الجنب بشكل ممتاز -->
+                        <div class="today-tasks-sidebar">
+                            <h3 class="sidebar-tasks-title">📌 مهام اليوم والمؤقت</h3>
+                            <ul id="today-tasks-list" class="tasks-list-sidebar-style"></ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 2. قسم Task Editor -->
+            <section id="section-editor" class="content-section hidden">
+                <header class="content-header">
+                    <h1>محرر المهام الذكي (Task Editor)</h1>
+                    <p>إدارة شاملة لمهام اليوم المحدد مع نظرة أسبوعية عامة ثابته</p>
+                </header>
+
+                <div class="editor-layout">
+                    <div class="form-card">
+                        <h3 class="subsection-title">➕ إضافة مهمة جديدة</h3>
+                        <div id="success-alert" class="alert-success hidden">✓ تم حفظ المهمة بنجاح!</div>
+
+                        <div class="form-group">
+                            <label for="task-input">اسم المهمة:</label>
+                            <input type="text" id="task-input" placeholder="ماذا تريد أن تنجز؟">
+                        </div>
+                        <div class="form-group">
+                            <label for="task-date">تاريخ التنفيذ:</label>
+                            <input type="date" id="task-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="task-duration">الوقت المتوقع (بالدقائق):</label>
+                            <input type="number" id="task-duration" value="30" min="5">
+                        </div>
+                        <button id="save-task-btn">✓ حفظ المهمة</button>
+                    </div>
+
+                    <div class="day-manager-card">
+                        <div class="manager-header">
+                            <h3>🔍 جدول مهام اليوم المحدد</h3>
+                            <input type="date" id="filter-date-input" class="inline-date-picker">
+                        </div>
+                        <div class="table-responsive">
+                            <table class="tasks-table">
+                                <thead>
+                                    <tr>
+                                        <th>المهمة</th>
+                                        <th>المدة</th>
+                                        <th>الوضعية (Situation)</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="editor-tasks-tbody"></tbody>
+                            </table>
+                            <div id="no-tasks-msg" class="hidden text-center-msg">لا توجد مهام مضافة لهذا اليوم.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الجدول الأسبوعي الثابت -->
+                <div class="weekly-manager-card">
+                    <div class="manager-header">
+                        <h3>📅 النظرة العامة والوضعية للأسبوع الحالي (من الإثنين إلى الأحد)</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="weekly-tasks-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 150px;">اليوم</th>
+                                    <th>المهام المجدولة (Tasks)</th>
+                                    <th style="width: 250px;">الوضعية (Situation)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="weekly-tasks-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. قسم كل المهام -->
+            <section id="section-all-tasks" class="content-section hidden">
+                <header class="content-header">
+                    <h1>جدول المهام الأسبوعي</h1>
+                    <p>استعراض شامل للأيام السبعة القادمة مع توضيح أيام الراحة</p>
+                </header>
+                <div id="timeline-container"></div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- النافذة المنبثقة للتعديل (Modal) -->
+    <!-- نافذة تعديل المهام السابقة (تأكد أنها تبدو هكذا مع الكلاس hidden) -->
+    <div id="edit-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>✏️ تعديل تفاصيل المهمة</h3>
+                <button id="close-modal-btn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-task-id">
+                <div class="form-group">
+                    <label for="edit-task-input">الاسم الجديد للمهمة:</label>
+                    <input type="text" id="edit-task-input">
+                </div>
+                <div class="form-group">
+                    <label for="edit-task-date">تاريخ التنفيذ الجديد:</label>
+                    <input type="date" id="edit-task-date">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-modal-btn" class="btn-modal-cancel">إلغاء</button>
+                <button id="update-task-btn" class="btn-modal-save">حفظ التغييرات</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ⚠️ نافذة الخطأ الجديدة لمنع تشغيل مهمتين في نفس الوقت ⚠️ -->
+    <div id="error-modal" class="modal-overlay hidden">
+        <div class="modal-box error-box">
+            <div class="modal-header">
+                <h3 style="color: #dc2626;">⚠️ تنبيه: تداخل في المهام</h3>
+                <button id="close-error-btn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="error-icon">🚫</div>
+                <p style="font-size: 16px; font-weight: bold; margin-top: 10px;">عذراً، لا يمكنك تشغيل مهمتين في نفس
+                    الوقت!</p>
+                <p style="color: var(--text-secondary); font-size: 13px;">يرجى إيقاف المهمة الحالية مؤقتاً (Pause) قبل
+                    بدء مهمة أخرى للتركيز العالي.</p>
+            </div>
+            <div class="modal-footer" style="justify-content: center;">
+                <button id="ok-error-btn" class="btn-modal-save" style="background-color: #dc2626;">حسناً، فهمت</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
